@@ -28,7 +28,7 @@
 
 import AppKit
 
-/// The delegate protocol for the browser view
+/// The delegate protocol for DSFBrowserView
 public protocol DSFBrowserViewDelegate {
 	/// Retrieve the root item for the browser
 	func rootItemFor(_ browser: DSFBrowserView) -> Any?
@@ -39,31 +39,31 @@ public protocol DSFBrowserViewDelegate {
 	/// Return the child at index of the item
 	func browserView(_ browser: DSFBrowserView, child index: Int, ofItem item: Any?) -> Any
 
-	/// Return the height of the row displaying the item (macOS 10.12 and earlier)
+	/// (Optional) Return the height of the row displaying the item (macOS 10.12 and earlier - ignored for 10.12+)
 	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat
 
 	/// Return the view to display for the item
 	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView?
 
-	/// Called when the user changes the selection within the control
+	/// (Optional) Called when the user changes the selection within the view
 	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet])
 
-	/// Called when the user starts dragging item(s) in a column
+	/// (Optional) Called for each item when the user starts dragging item(s) in a column
 	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting?
 }
 
 // Default implementations
 public extension DSFBrowserViewDelegate {
-
+	// Default implementation.
 	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat {
 		return 24
 	}
 
 	// Default implementation which does nothing
-	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) { }
+	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) {}
 
 	// Default implementation which does nothing
-	func browserView(_: DSFBrowserView, pasteboardWriterForRow _: Int, column _: Int) -> NSPasteboardWriting? {
+	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
 		return nil
 	}
 }

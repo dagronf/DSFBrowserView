@@ -383,4 +383,40 @@ internal extension DSFBrowserView {
 	}
 }
 
+// MARK: - Keyboard handling
+
+internal extension DSFBrowserView {
+
+	func moveForward(_ column: BrowserColumn) {
+		if column.offset >= self.columnCount - 1 {
+			return
+		}
+
+		let nextColumn = self.columns[column.offset + 1]
+		if nextColumn.tableView.numberOfRows > 0 {
+			self.window?.makeFirstResponder(nextColumn.tableView)
+		}
+
+		if nextColumn.tableView.selectedRowIndexes.count == 0 {
+			// Select the first row
+			nextColumn.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+		}
+
+	}
+
+	func moveBack(_ column: BrowserColumn) {
+		if column.offset == 0 {
+			return
+		}
+
+		let prevColumn = self.columns[column.offset - 1]
+		self.window?.makeFirstResponder(prevColumn.tableView)
+
+		if column.tableView.allowsEmptySelection {
+			column.tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+		}
+	}
+
+}
+
 #endif

@@ -25,6 +25,7 @@ class ViewController: NSViewController {
 		browserView.add(DSFBrowserView.Column("Heading 3", allowMultipleSelection: true, allowEmptySelection: true))
 
 		browserView.autohidesScrollers = true
+		browserView.hideSeparators = false
 		browserView.reloadData()
 	}
 
@@ -54,7 +55,7 @@ extension ViewController: DSFBrowserViewDelegate {
 		fatalError()
 	}
 
-	// Only useful for macOS 10.12 and lower.  
+	// Only useful for macOS 10.12 and lower.
 	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat {
 		48
 	}

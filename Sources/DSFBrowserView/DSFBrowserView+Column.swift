@@ -31,6 +31,8 @@ import AppKit
 internal extension DSFBrowserView {
 	// Internal browser column view
 	class BrowserColumn: NSObject, NSTableViewDataSource, NSTableViewDelegate {
+		unowned var parent: DSFBrowserView!
+
 		let contentStack: NSStackView
 		let label: NSTextField
 		let tableView: NSTableView
@@ -76,8 +78,6 @@ internal extension DSFBrowserView {
 			self.scrollView.needsDisplay = true
 		}
 
-		unowned var parent: DSFBrowserView!
-
 		init(parent: DSFBrowserView, offset: Int) {
 			self.parent = parent
 			self.offset = offset
@@ -109,11 +109,12 @@ internal extension DSFBrowserView {
 
 			self.contentStack.addArrangedSubview(paddedLabel)
 
-			let tableView = NSTableView()
+			let tableView = BrowserColumnTableView()
 			tableView.translatesAutoresizingMaskIntoConstraints = false
 			if #available(macOSApplicationExtension 10.13, *) {
 				tableView.usesAutomaticRowHeights = true
-			} else {
+			}
+			else {
 				// Fallback on earlier versions
 			}
 			tableView.allowsEmptySelection = true
@@ -124,7 +125,7 @@ internal extension DSFBrowserView {
 			else {
 				// Fallback on earlier versions
 			}
-			tableView.gridStyleMask = .dashedHorizontalGridLineMask
+			// tableView.gridStyleMask = .dashedHorizontalGridLineMask
 
 			let column = NSTableColumn()
 			tableView.addTableColumn(column)
@@ -165,6 +166,7 @@ internal extension DSFBrowserView {
 
 			self.updateBackground()
 
+			tableView.parent = self
 			tableView.delegate = self
 			tableView.dataSource = self
 		}
@@ -194,7 +196,7 @@ internal extension DSFBrowserView {
 			return delegate.browserView(self.parent, numberOfChildrenOfItem: self.item)
 		}
 
-		func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+		func tableView(_: NSTableView, heightOfRow row: Int) -> CGFloat {
 			if #available(macOS 10.13, *) {
 				return 24
 			}
@@ -222,7 +224,7 @@ internal extension DSFBrowserView {
 			stack.translatesAutoresizingMaskIntoConstraints = false
 			stack.orientation = .horizontal
 			stack.distribution = .fillProportionally
-			stack.spacing = 0
+			stack.spacing = 8
 
 			stack.addArrangedSubview(v)
 
@@ -244,6 +246,33 @@ internal extension DSFBrowserView {
 				return self.parent.delegate?.browserView(self.parent, pasteboardWriterForItem: item)
 			}
 			return nil
+		}
+	}
+}
+
+// MARK: - Keyboard handling
+
+internal extension DSFBrowserView.BrowserColumn {
+	func moveForward() {
+		self.parent.moveForward(self)
+	}
+
+	func moveBack() {
+		self.parent.moveBack(self)
+	}
+}
+
+private class BrowserColumnTableView: NSTableView {
+	unowned var parent: DSFBrowserView.BrowserColumn!
+	override func keyDown(with event: NSEvent) {
+		if event.keyCode == 0x7C { // kVK_RightArrow
+			self.parent.moveForward()
+		}
+		else if event.keyCode == 0x7B { // kVK_LeftArrow
+			self.parent.moveBack()
+		}
+		else {
+			super.keyDown(with: event)
 		}
 	}
 }
