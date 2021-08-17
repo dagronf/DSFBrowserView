@@ -45,7 +45,7 @@ public class DSFBrowserView: NSView {
 
 	/// A Boolean that indicates whether the scroll view automatically hides its
 	/// scroll bars when they are not needed.
-	@IBInspectable public var autohidesScrollers: Bool = false {
+	public var autohidesScrollers: Bool = false {
 		didSet {
 			self.updateAutohidesScrollers()
 		}
@@ -53,55 +53,11 @@ public class DSFBrowserView: NSView {
 
 	/// A Boolean that indicates whether the scroll view automatically hides its
 	/// scroll bars when they are not needed.
-	@IBInspectable public var hideSeparators: Bool = true {
+	public var hideSeparators: Bool = true {
 		didSet {
 			self.browserStack.arrangedSubviews
 				.compactMap { $0 as? NSBox }
 				.forEach { $0.isHidden = self.hideSeparators }
-		}
-	}
-
-	/// The visibility of the header.  Should only be used from interface builder
-	@IBInspectable public var headerVisibilityValue: Int = 0 {
-		didSet {
-			self.headerVisibility = HeaderVisibility(rawValue: self.headerVisibilityValue) ?? .autohide
-		}
-	}
-
-	// MARK: - Number of columns
-
-	/// The initial number of columns for the browser. Should only be used from interface builder
-	@IBInspectable public var numberOfColumns: Int = 3
-
-	// MARK: - IB Titles
-
-	@IBInspectable public var title1: String = "" {
-		didSet {
-			self.setHeaderText(self.title1, forColumn: 0)
-		}
-	}
-
-	@IBInspectable public var title2: String = "" {
-		didSet {
-			self.setHeaderText(self.title2, forColumn: 1)
-		}
-	}
-
-	@IBInspectable public var title3: String = "" {
-		didSet {
-			self.setHeaderText(self.title3, forColumn: 2)
-		}
-	}
-
-	@IBInspectable public var title4: String = "" {
-		didSet {
-			self.setHeaderText(self.title4, forColumn: 3)
-		}
-	}
-
-	@IBInspectable public var title5: String = "" {
-		didSet {
-			self.setHeaderText(self.title5, forColumn: 4)
 		}
 	}
 
@@ -179,9 +135,6 @@ public class DSFBrowserView: NSView {
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		self.setup()
-
-		// If we're loading from a XIB, create the number of columns required
-		self.configureFromXIB()
 	}
 
 	// Privates
@@ -219,23 +172,10 @@ public extension DSFBrowserView {
 // MARK: - Interface builder support
 
 public extension DSFBrowserView {
-	func configureFromXIB() {
-		(0 ..< self.numberOfColumns).forEach { index in
-			switch index {
-			case 0: self.addColumn(self.title1)
-			case 1: self.addColumn(self.title2)
-			case 2: self.addColumn(self.title3)
-			case 3: self.addColumn(self.title4)
-			case 4: self.addColumn(self.title5)
-			default: self.addColumn("")
-			}
-		}
-	}
-
 	override func prepareForInterfaceBuilder() {
 		self.setup()
 		self.removeAllColumns()
-		self.configureFromXIB()
+		
 	}
 }
 
@@ -251,8 +191,8 @@ public extension DSFBrowserView {
 	) {
 		self.add(
 			Column(headerText,
-			       allowMultipleSelection: allowsMultipleSelection,
-			       allowEmptySelection: allowsEmptySelection))
+					 allowMultipleSelection: allowsMultipleSelection,
+					 allowEmptySelection: allowsEmptySelection))
 	}
 
 	/// Add a column
@@ -320,10 +260,11 @@ public extension DSFBrowserView {
 	}
 
 	/// Set settings for a particular column
-	func set(_ headerText: String? = nil,
-	         allowsMultipleSelection: Bool? = nil,
-	         allowsEmptySelection: Bool? = nil,
-	         forColumn column: Int)
+	func set(
+		_ headerText: String? = nil,
+		allowsMultipleSelection: Bool? = nil,
+		allowsEmptySelection: Bool? = nil,
+		forColumn column: Int)
 	{
 		if let h = headerText {
 			self.setHeaderText(h, forColumn: column)

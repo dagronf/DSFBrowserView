@@ -20,9 +20,9 @@ class ViewController: NSViewController {
 		// Do any additional setup after loading the view.
 		browserView.delegate = self
 
-		browserView.set(allowsMultipleSelection: false, allowsEmptySelection: true, forColumn: 0)
-		browserView.set(allowsMultipleSelection: false, allowsEmptySelection: true, forColumn: 1)
-		browserView.set(allowsMultipleSelection: true, allowsEmptySelection: true, forColumn: 2)
+		browserView.add(DSFBrowserView.Column("Heading 1", allowMultipleSelection: false, allowEmptySelection: true))
+		browserView.add(DSFBrowserView.Column("Heading 2", allowMultipleSelection: false, allowEmptySelection: true))
+		browserView.add(DSFBrowserView.Column("Heading 3", allowMultipleSelection: true, allowEmptySelection: true))
 
 		browserView.autohidesScrollers = true
 		browserView.reloadData()
