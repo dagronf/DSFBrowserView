@@ -28,21 +28,28 @@
 
 import AppKit
 
-// The delegate protocol for the browser view
+/// The delegate protocol for the browser view
 public protocol DSFBrowserViewDelegate {
-	/// Request the number of rows to display in the specified column
-	func browserView(_ browser: DSFBrowserView, numberOfRowsForColumn: Int) -> Int
+	/// Retrieve the root item for the browser
+	func rootItemFor(_ browser: DSFBrowserView) -> Any?
 
-	/// Return the view to be displayed for the specified row and column
-	func browserView(_ browser: DSFBrowserView, viewForRow row: Int, inColumn column: Int) -> NSView?
+	/// Retrieve the number of children for the specified item
+	func browserView(_ browser: DSFBrowserView, numberOfChildrenOfItem item: Any?) -> Int
+
+	/// Return the child at index of the item
+	func browserView(_ browser: DSFBrowserView, child index: Int, ofItem item: Any?) -> Any
+
+	/// Returns the view that will display the item
+	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView?
 
 	/// Called when the user changes the selection within the control
 	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet])
 
-	/// Called when the user starts to drag row(s) in a column
-	func browserView(_ browser: DSFBrowserView, pasteboardWriterForRow row: Int, column: Int) -> NSPasteboardWriting?
+	/// Called when the user starts dragging item(s) in a column
+	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting?
 }
 
+// Default implementations
 extension DSFBrowserViewDelegate {
 	// Default implementation which does nothing
 	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) { }

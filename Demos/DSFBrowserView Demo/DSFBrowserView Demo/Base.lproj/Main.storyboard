@@ -712,6 +712,19 @@
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Iip-Os-6bs" customClass="DSFBrowserView" customModule="DSFBrowserView">
                                 <rect key="frame" x="20" y="20" width="624" height="405"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="autohidesScrollers" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideSeparators" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="numberOfColumns">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="headerVisibilityValue">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title1" value="Header 1"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title2" value="Header 2"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="title3" value="Header 3"/>
+                                </userDefinedRuntimeAttributes>
                             </customView>
                         </subviews>
                         <constraints>

@@ -139,6 +139,44 @@ public class DSFBrowserView: NSView {
 		}
 	}
 
+	// MARK: - Selections
+
+	/// Returns ALL selected items in all columns
+	public var selectedItems: [[Any]] {
+		let s = self.columnSelections
+		return self.columns.enumerated().map {
+			// The index of the column
+			let index = $0.offset
+
+			// The column
+			let column = $0.element
+
+			// All the selections in the column
+			let selections = s[index]
+
+			return selections.compactMap { selection in
+				return self.delegate?.browserView(self, child: selection, ofItem: column.item)
+			}
+		}
+	}
+
+	/// Returns the selected leaf items
+	public var selectedLeafItems: [Any] {
+		guard
+			let leafSels = self.columnSelections.last,
+			leafSels.count > 0,
+			let lastColumn = self.columns.last,
+			let lastColumnItem = lastColumn.item else {
+				return []
+			}
+
+		return leafSels.compactMap { selection in
+			return self.delegate?.browserView(self, child: selection, ofItem: lastColumnItem)
+		}
+	}
+
+	// MARK: - Creation
+
 	public override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		self.setup()
@@ -311,6 +349,9 @@ public extension DSFBrowserView {
 	/// Reload the entire contents of the browser view
 	func reloadData() {
 		self.updateAllColumnsForHeaderVisibility()
+
+		self.columns[0].item = self.delegate?.rootItemFor(self)
+
 		self.columns[0].reload()
 	}
 
@@ -320,7 +361,7 @@ public extension DSFBrowserView {
 	}
 }
 
-private extension DSFBrowserView {
+internal extension DSFBrowserView {
 	// Configure the base view
 	private func setup() {
 		self.browserStack.translatesAutoresizingMaskIntoConstraints = false
@@ -373,12 +414,12 @@ private extension DSFBrowserView {
 	}
 
 	// Is the column index the last (leaf) column?
-	private func isLeaf(column: Int) -> Bool {
+	func isLeaf(column: Int) -> Bool {
 		return column == self.columnCount - 1
 	}
 
 	// Called from the column
-	private func selectionsDidChange(column: Int, rows: IndexSet) {
+	func selectionsDidChange(column: Int, rows: IndexSet) {
 		if rows.isEmpty {
 			((column + 1) ..< self.columnCount).forEach { index in
 				self.columns[index].isActive = false
@@ -386,6 +427,13 @@ private extension DSFBrowserView {
 		}
 		else {
 			if column < self.columnCount - 1 {
+				// Get the item for the column that changed
+				let item = self.columns[column].item
+
+				// Ask the delegate for the rootItem for the NEXT column
+				let nextColumnRootItem = self.delegate?.browserView(self, child: rows.first!, ofItem: item)
+
+				self.columns[column + 1].item = nextColumnRootItem
 				self.columns[column + 1].isActive = true
 			}
 			if column < self.columnCount - 2 {
@@ -397,204 +445,6 @@ private extension DSFBrowserView {
 
 		// Update the view
 		self.delegate?.browserView(self, selectionDidChange: self.columnSelections)
-	}
-}
-
-extension DSFBrowserView {
-	// Internal browser column view
-	class BrowserColumn: NSObject, NSTableViewDataSource, NSTableViewDelegate {
-		let contentStack: NSStackView
-		let label: NSTextField
-		let tableView: NSTableView
-		let scrollView: NSScrollView
-		let offset: Int
-
-		var heading: String = "" {
-			didSet {
-				self.label.stringValue = self.heading
-			}
-		}
-
-		var hideHeading: Bool = false {
-			didSet {
-				self.label.isHidden = self.hideHeading
-				self.label.superview?.isHidden = self.hideHeading
-			}
-		}
-
-		internal func view() -> NSView { return self.contentStack }
-
-		var isActive: Bool = false {
-			didSet {
-				self.updateBackground()
-				self.tableView.reloadData()
-			}
-		}
-
-		var columnSelection: IndexSet {
-			return self.isActive ? self.tableView.selectedRowIndexes : IndexSet()
-		}
-
-		func updateBackground() {
-			if self.isActive {
-				self.scrollView.drawsBackground = false
-			}
-			else {
-				self.scrollView.drawsBackground = true
-				self.scrollView.backgroundColor = .underPageBackgroundColor
-			}
-			self.scrollView.needsDisplay = true
-		}
-
-		unowned var parent: DSFBrowserView!
-
-		init(parent: DSFBrowserView, offset: Int) {
-			self.parent = parent
-			self.offset = offset
-
-			let stack = NSStackView()
-			self.contentStack = stack
-			stack.orientation = .vertical
-			stack.alignment = .leading
-			stack.distribution = .fillProportionally
-			stack.spacing = 0
-			stack.setHuggingPriority(.defaultHigh, for: .vertical)
-			stack.setContentHuggingPriority(.defaultHigh, for: .vertical)
-			stack.detachesHiddenViews = true
-
-			let label = NSTextField()
-			label.translatesAutoresizingMaskIntoConstraints = false
-			label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-			label.setContentHuggingPriority(.defaultHigh, for: .vertical)
-			label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-			label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-			label.isEditable = false
-			label.isBordered = false
-			label.drawsBackground = false
-			label.isHidden = self.heading.isEmpty
-			label.stringValue = self.heading
-			self.label = label
-
-			let paddedLabel = label.padded(NSEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
-
-			self.contentStack.addArrangedSubview(paddedLabel)
-
-			let tableView = NSTableView()
-			tableView.translatesAutoresizingMaskIntoConstraints = false
-			tableView.usesAutomaticRowHeights = true
-			tableView.allowsEmptySelection = true
-			tableView.allowsMultipleSelection = false
-			if #available(macOS 11.0, *) {
-				tableView.style = .inset
-			}
-			else {
-				// Fallback on earlier versions
-			}
-			tableView.gridStyleMask = .dashedHorizontalGridLineMask
-
-			let column = NSTableColumn()
-			tableView.addTableColumn(column)
-			tableView.headerView = nil
-			self.tableView = tableView
-
-			let scrollView = NSScrollView()
-			self.scrollView = scrollView
-
-			scrollView.translatesAutoresizingMaskIntoConstraints = false
-			scrollView.borderType = .noBorder
-			scrollView.drawsBackground = true
-
-			scrollView.autohidesScrollers = false
-			scrollView.hasVerticalScroller = true
-			scrollView.borderType = .noBorder
-
-			let clipView = FlippedClipView()
-			clipView.drawsBackground = false
-			scrollView.contentView = clipView
-			clipView.translatesAutoresizingMaskIntoConstraints = false
-			clipView.drawsBackground = false
-
-			clipView.pinEdges(to: scrollView)
-
-			scrollView.documentView = tableView
-
-			NSLayoutConstraint.activate([
-				tableView.leftAnchor.constraint(equalTo: clipView.leftAnchor),
-				tableView.topAnchor.constraint(equalTo: clipView.topAnchor),
-				tableView.rightAnchor.constraint(equalTo: clipView.rightAnchor),
-				// NOTE: No need for bottomAnchor
-			])
-
-			self.contentStack.addArrangedSubview(self.scrollView)
-
-			super.init()
-
-			self.updateBackground()
-
-			tableView.delegate = self
-			tableView.dataSource = self
-		}
-
-		func reload() {
-			self.tableView.reloadData()
-		}
-
-		private func ArrowImage() -> NSImageView {
-			let image = (self.parent.userInterfaceLayoutDirection == .rightToLeft)
-				? NSImage(named: "NSGoLeftTemplate")!
-				: NSImage(named: "NSGoRightTemplate")!
-
-			let i = NSImageView(image: image)
-			i.translatesAutoresizingMaskIntoConstraints = false
-			i.setContentHuggingPriority(.required, for: .horizontal)
-			return i
-		}
-
-		func numberOfRows(in _: NSTableView) -> Int {
-			guard self.isActive else {
-				return 0
-			}
-
-			guard let delegate = self.parent.delegate else { return 0 }
-			return delegate.browserView(self.parent, numberOfRowsForColumn: self.offset)
-		}
-
-		func tableView(_: NSTableView, viewFor _: NSTableColumn?, row: Int) -> NSView? {
-			guard self.isActive else { return nil }
-
-			guard let delegate = self.parent.delegate else { return nil }
-			guard let v = delegate.browserView(self.parent, viewForRow: row, inColumn: self.offset) else {
-				return nil
-			}
-
-			if self.parent.isLeaf(column: self.offset) {
-				return v
-			}
-
-			let stack = NSStackView()
-			stack.translatesAutoresizingMaskIntoConstraints = false
-			stack.orientation = .horizontal
-			stack.distribution = .fillProportionally
-			stack.spacing = 0
-
-			stack.addArrangedSubview(v)
-
-			stack.addArrangedSubview(self.ArrowImage())
-
-			stack.needsLayout = true
-			stack.layout()
-
-			return stack
-		}
-
-		func tableViewSelectionDidChange(_: Notification) {
-			self.parent.selectionsDidChange(column: self.offset, rows: self.columnSelection)
-		}
-
-		/// When a table row has begun to be dragged
-		func tableView(_: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-			return self.parent.delegate?.browserView(self.parent, pasteboardWriterForRow: row, column: self.offset)
-		}
 	}
 }
 
