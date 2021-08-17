@@ -81,12 +81,6 @@ public class DSFBrowserView: NSView {
 		}
 	}
 
-	@IBInspectable public var allowsMultipleSelection1: Bool = false {
-		didSet {
-			self.setAllowsMultipleSelection(allowsMultipleSelection1, forColumn: 0)
-		}
-	}
-
 	@IBInspectable public var title2: String = "" {
 		didSet {
 			self.setHeaderText(self.title2, forColumn: 1)
@@ -132,14 +126,14 @@ public class DSFBrowserView: NSView {
 		return self.columns.count
 	}
 
+	// MARK: - Selections
+
 	/// Returns the selections in browser
 	public var columnSelections: [IndexSet] {
 		return self.columns.map {
 			$0.columnSelection
 		}
 	}
-
-	// MARK: - Selections
 
 	/// Returns ALL selected items in all columns
 	public var selectedItems: [[Any]] {
@@ -171,13 +165,13 @@ public class DSFBrowserView: NSView {
 			}
 
 		return leafSels.compactMap { selection in
-			return self.delegate?.browserView(self, child: selection, ofItem: lastColumnItem)
+			self.delegate?.browserView(self, child: selection, ofItem: lastColumnItem)
 		}
 	}
 
 	// MARK: - Creation
 
-	public override init(frame frameRect: NSRect) {
+	override public init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		self.setup()
 	}
@@ -187,7 +181,7 @@ public class DSFBrowserView: NSView {
 		self.setup()
 
 		// If we're loading from a XIB, create the number of columns required
-		self.preloadFromXIB()
+		self.configureFromXIB()
 	}
 
 	// Privates
@@ -225,7 +219,7 @@ public extension DSFBrowserView {
 // MARK: - Interface builder support
 
 public extension DSFBrowserView {
-	func preloadFromXIB() {
+	func configureFromXIB() {
 		(0 ..< self.numberOfColumns).forEach { index in
 			switch index {
 			case 0: self.addColumn(self.title1)
@@ -241,7 +235,7 @@ public extension DSFBrowserView {
 	override func prepareForInterfaceBuilder() {
 		self.setup()
 		self.removeAllColumns()
-		self.preloadFromXIB()
+		self.configureFromXIB()
 	}
 }
 

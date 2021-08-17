@@ -59,6 +59,7 @@ internal extension NSView {
 }
 
 internal extension Array {
+	/// Returns the item at the specified index, or nil if the index is out of range
 	@inlinable func at(_ index: Int) -> Element? {
 		if index >= 0 && index < self.count {
 			return self[index]
