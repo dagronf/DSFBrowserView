@@ -101,13 +101,8 @@ extension ViewController: DSFBrowserViewDelegate {
 		return nil
 	}
 
-	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) {
+	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [[Any]]) {
 		Swift.print("Did select [\(selections)]")
-		let i = browser.selectedItems
-		Swift.print(i)
-
-		let l = browser.selectedLeafItems
-		Swift.print(l)
 	}
 
 	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {

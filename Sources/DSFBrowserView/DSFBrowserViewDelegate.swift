@@ -45,8 +45,8 @@ public protocol DSFBrowserViewDelegate {
 	/// Return the view to display for the item
 	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView?
 
-	/// (Optional) Called when the user changes the selection within the view
-	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet])
+	/// (Optional) Called when the user changes the selection within the view. `selections` are the selected items for each column (l-r)
+	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [[Any]])
 
 	/// (Optional) Called for each item when the user starts dragging item(s) in a column
 	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting?
@@ -60,9 +60,9 @@ public extension DSFBrowserViewDelegate {
 	}
 
 	// Default implementation which does nothing
-	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) {}
+	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [[Any]]) {}
 
-	// Default implementation which does nothing
+	// By default, dragging is disabled
 	func browserView(_ browser: DSFBrowserView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
 		return nil
 	}
