@@ -39,7 +39,10 @@ public protocol DSFBrowserViewDelegate {
 	/// Return the child at index of the item
 	func browserView(_ browser: DSFBrowserView, child index: Int, ofItem item: Any?) -> Any
 
-	/// Returns the view that will display the item
+	/// Return the height of the row displaying the item (macOS 10.12 and earlier)
+	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat
+
+	/// Return the view to display for the item
 	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView?
 
 	/// Called when the user changes the selection within the control
@@ -50,7 +53,12 @@ public protocol DSFBrowserViewDelegate {
 }
 
 // Default implementations
-extension DSFBrowserViewDelegate {
+public extension DSFBrowserViewDelegate {
+
+	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat {
+		return 24
+	}
+
 	// Default implementation which does nothing
 	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [IndexSet]) { }
 

@@ -36,7 +36,6 @@ class ViewController: NSViewController {
 }
 
 extension ViewController: DSFBrowserViewDelegate {
-
 	func rootItemFor(_ browser: DSFBrowserView) -> Any? {
 		return sampleData
 	}
@@ -53,6 +52,11 @@ extension ViewController: DSFBrowserViewDelegate {
 			return i.children[index]
 		}
 		fatalError()
+	}
+
+	// Only useful for macOS 10.12 and lower.  
+	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat {
+		48
 	}
 
 	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView? {

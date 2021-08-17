@@ -111,7 +111,11 @@ internal extension DSFBrowserView {
 
 			let tableView = NSTableView()
 			tableView.translatesAutoresizingMaskIntoConstraints = false
-			tableView.usesAutomaticRowHeights = true
+			if #available(macOSApplicationExtension 10.13, *) {
+				tableView.usesAutomaticRowHeights = true
+			} else {
+				// Fallback on earlier versions
+			}
 			tableView.allowsEmptySelection = true
 			tableView.allowsMultipleSelection = false
 			if #available(macOS 11.0, *) {
@@ -174,7 +178,8 @@ internal extension DSFBrowserView {
 				? NSImage(named: "NSGoLeftTemplate")!
 				: NSImage(named: "NSGoRightTemplate")!
 
-			let i = NSImageView(image: image)
+			let i = NSImageView()
+			i.image = image
 			i.translatesAutoresizingMaskIntoConstraints = false
 			i.setContentHuggingPriority(.required, for: .horizontal)
 			return i
@@ -187,6 +192,16 @@ internal extension DSFBrowserView {
 
 			guard let delegate = self.parent.delegate else { return 0 }
 			return delegate.browserView(self.parent, numberOfChildrenOfItem: self.item)
+		}
+
+		func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+			if #available(macOS 10.13, *) {
+				return 24
+			}
+
+			guard let delegate = self.parent.delegate else { return 24 }
+			let child = delegate.browserView(self.parent, child: row, ofItem: self.item)
+			return delegate.browserView(self.parent, heightOfViewForItem: child)
 		}
 
 		func tableView(_: NSTableView, viewFor _: NSTableColumn?, row: Int) -> NSView? {
