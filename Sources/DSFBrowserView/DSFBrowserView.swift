@@ -125,7 +125,7 @@ public class DSFBrowserView: NSView {
 		}
 	}
 
-	// MARK: - Creation
+	// MARK: - Creation and deletion
 
 	override public init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
@@ -135,6 +135,11 @@ public class DSFBrowserView: NSView {
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		self.setup()
+	}
+
+	deinit {
+		self.browserStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		self.columns.removeAll()
 	}
 
 	// Privates
@@ -379,7 +384,7 @@ internal extension DSFBrowserView {
 		}
 
 		// Update the view
-		self.delegate?.browserView(self, selectionDidChange: self.columnSelections)
+		self.delegate?.browserView(self, selectionDidChange: self.selectedItems)
 	}
 }
 

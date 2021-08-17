@@ -39,7 +39,15 @@ internal extension DSFBrowserView {
 		let scrollView: NSScrollView
 		let offset: Int
 
+		/// The item that defines the content for the column
 		var item: Any?
+
+		deinit {
+			self.item = nil
+			self.parent = nil
+
+			self.contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		}
 
 		var heading: String = "" {
 			didSet {
@@ -263,7 +271,13 @@ internal extension DSFBrowserView.BrowserColumn {
 }
 
 private class BrowserColumnTableView: NSTableView {
+	// This tableview WILL NOT outlive the column which contains it
 	unowned var parent: DSFBrowserView.BrowserColumn!
+
+	deinit {
+		self.parent = nil // Unnecessary due to unowned, but lets be a good citizen
+	}
+
 	override func keyDown(with event: NSEvent) {
 		if event.keyCode == 0x7C { // kVK_RightArrow
 			self.parent.moveForward()
