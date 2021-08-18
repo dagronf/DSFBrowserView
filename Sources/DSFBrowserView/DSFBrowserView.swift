@@ -255,7 +255,7 @@ public extension DSFBrowserView {
 		self.updateAllColumnsForHeaderVisibility()
 
 		self.columns[0].tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
-		self.columns[0].item = self.delegate?.rootItemFor(self)
+		self.columns[0].item = self.delegate?.rootItem(for: self)
 		self.columns[0].reload()
 	}
 

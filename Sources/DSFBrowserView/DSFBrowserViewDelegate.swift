@@ -31,7 +31,7 @@ import AppKit
 /// The delegate protocol for DSFBrowserView
 public protocol DSFBrowserViewDelegate {
 	/// Retrieve the root item for the browser
-	func rootItemFor(_ browser: DSFBrowserView) -> Any?
+	func rootItem(for browser: DSFBrowserView) -> Any?
 
 	/// Retrieve the number of children for the specified item
 	func browserView(_ browser: DSFBrowserView, numberOfChildrenOfItem item: Any?) -> Int

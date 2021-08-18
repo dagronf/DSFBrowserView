@@ -19,7 +19,7 @@ A modern-ish NSBrowser-style control allowing complex row views.
 
 ## Why?
 
-I use an NSBrowser for one of my apps and got frustrated with the limitations of what could be displayed within the browser columns.
+I use an NSBrowser for one of my apps and got frustrated with the limitations of what could be displayed within the browser columns.  Well, you CAN tweak the output BUT you have to do a lot of your own drawing code in a custom NSCell. Boo!
 
 This implementation follows the model of the modern NSTableView, using `NSView`s to display browser cells and allowing the user to customise the cell views depending on need.
 
@@ -60,7 +60,7 @@ The delegate is asked for content to display in the control.
 #### Data Source
 
 ```swift
-func rootItemFor(_ browser: DSFBrowserView) -> Any?
+func rootItem(for browser: DSFBrowserView) -> Any?
 ```
 
 Return the root element of the browser view. This might be an array of objects (for example)
@@ -103,6 +103,14 @@ func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> C
 ```
 
 If you are targeting 10.12 or earlier, AutoLayout isn't supported for table view cells. You will need to provide a height to use for the view being displayed for `item`.
+
+## Screenshots
+
+<p align="center">
+   <a href="https://github.com/dagronf/dagronf.github.io/blob/master/art/projects/DSFBrowserView/moviedb.jpg?raw=true">
+      <img src="https://github.com/dagronf/dagronf.github.io/blob/master/art/projects/DSFBrowserView/moviedb.jpg?raw=true" alt="Swift Package Manager" width="700"/></a>
+   </a>
+</p>
 
 # License
 

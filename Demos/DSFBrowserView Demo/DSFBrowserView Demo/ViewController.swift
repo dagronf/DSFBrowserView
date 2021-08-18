@@ -51,7 +51,7 @@ class ViewController: NSViewController {
 }
 
 extension ViewController: DSFBrowserViewDelegate {
-	func rootItemFor(_ browser: DSFBrowserView) -> Any? {
+	func rootItem(for browser: DSFBrowserView) -> Any? {
 		return sampleData
 	}
 
