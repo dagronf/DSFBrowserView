@@ -20,9 +20,9 @@ class ViewController: NSViewController {
 		// Do any additional setup after loading the view.
 		browserView.delegate = self
 
-		browserView.add(DSFBrowserView.Column("Heading 1", allowMultipleSelection: false, allowEmptySelection: true))
-		browserView.add(DSFBrowserView.Column("Heading 2", allowMultipleSelection: false, allowEmptySelection: true))
-		browserView.add(DSFBrowserView.Column("Heading 3", allowMultipleSelection: true, allowEmptySelection: true))
+		browserView.addColumn("Heading 1", allowMultipleSelection: false, allowEmptySelection: true)
+		browserView.addColumn("Heading 2", allowMultipleSelection: false, allowEmptySelection: true)
+		browserView.addColumn("Heading 3", allowMultipleSelection: true, allowEmptySelection: true)
 
 		browserView.autohidesScrollers = true
 		browserView.hideSeparators = false
@@ -34,6 +34,20 @@ class ViewController: NSViewController {
 		// Update the view, if already loaded.
 		}
 	}
+
+	var reloadCount = 0
+	@IBAction func userPressedReset(_ sender: Any) {
+		reloadCount += 1
+		browserView.reloadData()
+	}
+
+	var reloadColumn1Count = 0
+	@IBAction func reloadOne(_ sender: Any) {
+		reloadColumn1Count += 1
+		browserView.reloadData(column: 1)
+	}
+
+
 }
 
 extension ViewController: DSFBrowserViewDelegate {
@@ -60,11 +74,19 @@ extension ViewController: DSFBrowserViewDelegate {
 		48
 	}
 
-	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView? {
+	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?, column: Int, row: Int) -> NSView? {
 		if let i = item as? SimpleData {
+
+			let title: String = {
+				if column == 1 {
+					return "Title '\(i.name)' (\(self.reloadCount)) [\(reloadColumn1Count)]"
+				}
+				return "Title '\(i.name)' (\(self.reloadCount))"
+			}()
+
 			let body =
 			VStack(spacing: 2, alignment: .leading, distribution: .fillProportionally) {
-				Label("Title '\(i.name)'")
+				Label(title)
 					.lineBreakMode(.byTruncatingTail)
 					.horizontalPriorities(hugging: 10, compressionResistance: 10)
 				Label("The auto layout API only provides one way to calculate distances")

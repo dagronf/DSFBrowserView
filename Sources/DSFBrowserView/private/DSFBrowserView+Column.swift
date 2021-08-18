@@ -37,7 +37,7 @@ internal extension DSFBrowserView {
 		let label: NSTextField
 		let tableView: NSTableView
 		let scrollView: NSScrollView
-		let offset: Int
+		let columnIndex: Int
 
 		/// The item that defines the content for the column
 		var item: Any?
@@ -66,6 +66,9 @@ internal extension DSFBrowserView {
 
 		var isActive: Bool = false {
 			didSet {
+				if self.isActive == false {
+					self.item = nil
+				}
 				self.updateBackground()
 				self.tableView.reloadData()
 			}
@@ -86,9 +89,9 @@ internal extension DSFBrowserView {
 			self.scrollView.needsDisplay = true
 		}
 
-		init(parent: DSFBrowserView, offset: Int) {
+		init(parent: DSFBrowserView, columnIndex: Int) {
 			self.parent = parent
-			self.offset = offset
+			self.columnIndex = columnIndex
 
 			let stack = NSStackView()
 			self.contentStack = stack
@@ -179,7 +182,9 @@ internal extension DSFBrowserView {
 			tableView.dataSource = self
 		}
 
+		// Reload the contents of the column
 		func reload() {
+			self.tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
 			self.tableView.reloadData()
 		}
 
@@ -220,11 +225,11 @@ internal extension DSFBrowserView {
 			guard let delegate = self.parent.delegate else { return nil }
 
 			let theItem = delegate.browserView(self.parent, child: row, ofItem: self.item)
-			guard let v = delegate.browserView(self.parent, viewForItem: theItem) else {
+			guard let v = delegate.browserView(self.parent, viewForItem: theItem, column: self.columnIndex, row: row) else {
 				return nil
 			}
 
-			if self.parent.isLeaf(column: self.offset) {
+			if self.parent.isLeaf(column: self.columnIndex) {
 				return v
 			}
 
@@ -245,7 +250,7 @@ internal extension DSFBrowserView {
 		}
 
 		func tableViewSelectionDidChange(_: Notification) {
-			self.parent.selectionsDidChange(column: self.offset, rows: self.columnSelection)
+			self.parent.selectionsDidChange(column: self.columnIndex, rows: self.columnSelection)
 		}
 
 		/// When a table row has begun to be dragged

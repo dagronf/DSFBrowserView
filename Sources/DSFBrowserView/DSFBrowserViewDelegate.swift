@@ -42,8 +42,8 @@ public protocol DSFBrowserViewDelegate {
 	/// (Optional) Return the height of the row displaying the item (macOS 10.12 and earlier - ignored for 10.12+)
 	func browserView(_ browser: DSFBrowserView, heightOfViewForItem item: Any?) -> CGFloat
 
-	/// Return the view to display for the item
-	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?) -> NSView?
+	/// Return the view to display for the item.
+	func browserView(_ browser: DSFBrowserView, viewForItem item: Any?, column: Int, row: Int) -> NSView?
 
 	/// (Optional) Called when the user changes the selection within the view. `selections` are the selected items for each column (l-r)
 	func browserView(_ browser: DSFBrowserView, selectionDidChange selections: [[Any]])

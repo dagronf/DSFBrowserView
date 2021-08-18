@@ -36,7 +36,7 @@ public class DSFBrowserView: NSView {
 		case show = 0
 		/// Hide the headers
 		case hide = 1
-		/// Autohide the headers if ALL the headers are empty
+		/// Hide the header if ALL the headers are empty
 		case autohide = 2
 	}
 
@@ -148,42 +148,6 @@ public class DSFBrowserView: NSView {
 	private var columns: [BrowserColumn] = []
 }
 
-// MARK: - Column definition
-
-public extension DSFBrowserView {
-	/// The definition of a column in the browser
-	struct Column {
-		let heading: String
-		let allowMultipleSelection: Bool
-		let allowEmptySelection: Bool
-
-		/// Create a column definition
-		/// - Parameters:
-		///   - heading: The heading text to display
-		///   - allowMultipleSelection: Does the column allow multiple selection?
-		///   - allowEmptySelection: Does the column allow empty selection?
-		public init(
-			_ heading: String = "",
-			allowMultipleSelection: Bool = false,
-			allowEmptySelection: Bool = true
-		) {
-			self.heading = heading
-			self.allowMultipleSelection = allowMultipleSelection
-			self.allowEmptySelection = allowEmptySelection
-		}
-	}
-}
-
-// MARK: - Interface builder support
-
-public extension DSFBrowserView {
-	override func prepareForInterfaceBuilder() {
-		self.setup()
-		self.removeAllColumns()
-		
-	}
-}
-
 // MARK: - Add Column
 
 public extension DSFBrowserView {
@@ -191,19 +155,19 @@ public extension DSFBrowserView {
 	/// - Parameter headerText: The title for the column (optional)
 	@inlinable func addColumn(
 		_ headerText: String = "",
-		allowsMultipleSelection: Bool = false,
-		allowsEmptySelection: Bool = false
+		allowMultipleSelection: Bool = false,
+		allowEmptySelection: Bool = false
 	) {
 		self.add(
 			Column(headerText,
-					 allowMultipleSelection: allowsMultipleSelection,
-					 allowEmptySelection: allowsEmptySelection))
+					 allowMultipleSelection: allowMultipleSelection,
+					 allowEmptySelection: allowEmptySelection))
 	}
 
 	/// Add a column
 	/// - Parameter column: The column definition
 	func add(_ column: Column) {
-		let c = BrowserColumn(parent: self, offset: columns.count)
+		let c = BrowserColumn(parent: self, columnIndex: columns.count)
 		if self.columns.count == 0 {
 			c.isActive = true
 		}
@@ -290,13 +254,14 @@ public extension DSFBrowserView {
 	func reloadData() {
 		self.updateAllColumnsForHeaderVisibility()
 
+		self.columns[0].tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
 		self.columns[0].item = self.delegate?.rootItemFor(self)
-
 		self.columns[0].reload()
 	}
 
 	/// Reload the contents of a particular column
-	func reload(column: Int) {
+	func reloadData(column: Int) {
+		//let column = self.columns[column]
 		self.columns[column].reload()
 	}
 }
@@ -388,16 +353,42 @@ internal extension DSFBrowserView {
 	}
 }
 
+// MARK: - Column definition
+
+public extension DSFBrowserView {
+	/// The definition of a column in the browser
+	struct Column {
+		let heading: String
+		let allowMultipleSelection: Bool
+		let allowEmptySelection: Bool
+
+		/// Create a column definition
+		/// - Parameters:
+		///   - heading: The heading text to display
+		///   - allowMultipleSelection: Does the column allow multiple selection?
+		///   - allowEmptySelection: Does the column allow empty selection?
+		public init(
+			_ heading: String = "",
+			allowMultipleSelection: Bool = false,
+			allowEmptySelection: Bool = true
+		) {
+			self.heading = heading
+			self.allowMultipleSelection = allowMultipleSelection
+			self.allowEmptySelection = allowEmptySelection
+		}
+	}
+}
+
 // MARK: - Keyboard handling
 
 internal extension DSFBrowserView {
 
 	func moveForward(_ column: BrowserColumn) {
-		if column.offset >= self.columnCount - 1 {
+		if column.columnIndex >= self.columnCount - 1 {
 			return
 		}
 
-		let nextColumn = self.columns[column.offset + 1]
+		let nextColumn = self.columns[column.columnIndex + 1]
 		if nextColumn.tableView.numberOfRows > 0 {
 			self.window?.makeFirstResponder(nextColumn.tableView)
 		}
@@ -410,18 +401,26 @@ internal extension DSFBrowserView {
 	}
 
 	func moveBack(_ column: BrowserColumn) {
-		if column.offset == 0 {
+		if column.columnIndex == 0 {
 			return
 		}
 
-		let prevColumn = self.columns[column.offset - 1]
+		let prevColumn = self.columns[column.columnIndex - 1]
 		self.window?.makeFirstResponder(prevColumn.tableView)
 
 		if column.tableView.allowsEmptySelection {
 			column.tableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
 		}
 	}
+}
 
+// MARK: - Interface builder support
+
+public extension DSFBrowserView {
+	override func prepareForInterfaceBuilder() {
+		self.setup()
+		self.removeAllColumns()
+	}
 }
 
 #endif
