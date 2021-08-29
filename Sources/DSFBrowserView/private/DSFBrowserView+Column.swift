@@ -122,7 +122,7 @@ internal extension DSFBrowserView {
 
 			let tableView = BrowserColumnTableView()
 			tableView.translatesAutoresizingMaskIntoConstraints = false
-			if #available(macOSApplicationExtension 10.13, *) {
+			if #available(macOS 10.13, *) {
 				tableView.usesAutomaticRowHeights = true
 			}
 			else {

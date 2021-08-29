@@ -2,16 +2,13 @@
 //  AppDelegate.swift
 //  DSFBrowserView Demo
 //
-//  Created by Darren Ford on 17/8/21.
+//  Created by Darren Ford on 30/8/21.
 //
 
 import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-	
-
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
@@ -25,6 +22,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		return true
 	}
 
-
 }
-

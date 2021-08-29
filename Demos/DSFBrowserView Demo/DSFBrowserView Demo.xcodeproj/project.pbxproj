@@ -3,73 +3,77 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2374934126CB66300014AB2D /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2374934026CB66300014AB2D /* DemoData.swift */; };
-		23D5A47B26CB467900211D4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5A47A26CB467900211D4F /* AppDelegate.swift */; };
-		23D5A47D26CB467900211D4F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D5A47C26CB467900211D4F /* ViewController.swift */; };
-		23D5A47F26CB467A00211D4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23D5A47E26CB467A00211D4F /* Assets.xcassets */; };
-		23D5A48226CB467A00211D4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23D5A48026CB467A00211D4F /* Main.storyboard */; };
-		23D5A48B26CB46F700211D4F /* DSFAppKitBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 23D5A48A26CB46F700211D4F /* DSFAppKitBuilder */; };
-		23D5A48E26CB474000211D4F /* DSFBrowserView in Frameworks */ = {isa = PBXBuildFile; productRef = 23D5A48D26CB474000211D4F /* DSFBrowserView */; };
+		2367D5C126DC538B004CB907 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2367D5C026DC538B004CB907 /* AppDelegate.swift */; };
+		2367D5C326DC538B004CB907 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2367D5C226DC538B004CB907 /* ViewController.swift */; };
+		2367D5C526DC538B004CB907 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2367D5C426DC538B004CB907 /* Assets.xcassets */; };
+		2367D5C826DC538B004CB907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2367D5C626DC538B004CB907 /* Main.storyboard */; };
+		2367D5EE26DC53AA004CB907 /* DSFAppKitBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 2367D5ED26DC53AA004CB907 /* DSFAppKitBuilder */; };
+		2367D5F226DC54A0004CB907 /* DSFBrowserView in Frameworks */ = {isa = PBXBuildFile; productRef = 2367D5F126DC54A0004CB907 /* DSFBrowserView */; };
+		2367D5F626DC551F004CB907 /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2367D5F526DC551F004CB907 /* DemoData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2374934026CB66300014AB2D /* DemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
-		23D5A47726CB467900211D4F /* DSFBrowserView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSFBrowserView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		23D5A47A26CB467900211D4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		23D5A47C26CB467900211D4F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		23D5A47E26CB467A00211D4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		23D5A48126CB467A00211D4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		23D5A48826CB468000211D4F /* DSFBrowserView */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DSFBrowserView; path = ../..; sourceTree = "<group>"; };
+		2367D5BD26DC538B004CB907 /* DSFBrowserView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSFBrowserView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2367D5C026DC538B004CB907 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2367D5C226DC538B004CB907 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2367D5C426DC538B004CB907 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2367D5C726DC538B004CB907 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2367D5C926DC538B004CB907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2367D5CA26DC538B004CB907 /* DSFBrowserView_Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DSFBrowserView_Demo.entitlements; sourceTree = "<group>"; };
+		2367D5EF26DC53B0004CB907 /* DSFBrowserView */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DSFBrowserView; path = ../..; sourceTree = "<group>"; };
+		2367D5F526DC551F004CB907 /* DemoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		23D5A47426CB467900211D4F /* Frameworks */ = {
+		2367D5BA26DC538B004CB907 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23D5A48E26CB474000211D4F /* DSFBrowserView in Frameworks */,
-				23D5A48B26CB46F700211D4F /* DSFAppKitBuilder in Frameworks */,
+				2367D5F226DC54A0004CB907 /* DSFBrowserView in Frameworks */,
+				2367D5EE26DC53AA004CB907 /* DSFAppKitBuilder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23D5A46E26CB467900211D4F = {
+		2367D5B426DC538B004CB907 = {
 			isa = PBXGroup;
 			children = (
-				23D5A48826CB468000211D4F /* DSFBrowserView */,
-				23D5A47926CB467900211D4F /* DSFBrowserView Demo */,
-				23D5A47826CB467900211D4F /* Products */,
-				23D5A48C26CB474000211D4F /* Frameworks */,
+				2367D5EF26DC53B0004CB907 /* DSFBrowserView */,
+				2367D5BF26DC538B004CB907 /* DSFBrowserView Demo */,
+				2367D5BE26DC538B004CB907 /* Products */,
+				2367D5F026DC54A0004CB907 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		23D5A47826CB467900211D4F /* Products */ = {
+		2367D5BE26DC538B004CB907 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23D5A47726CB467900211D4F /* DSFBrowserView Demo.app */,
+				2367D5BD26DC538B004CB907 /* DSFBrowserView Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		23D5A47926CB467900211D4F /* DSFBrowserView Demo */ = {
+		2367D5BF26DC538B004CB907 /* DSFBrowserView Demo */ = {
 			isa = PBXGroup;
 			children = (
-				23D5A47A26CB467900211D4F /* AppDelegate.swift */,
-				2374934026CB66300014AB2D /* DemoData.swift */,
-				23D5A47C26CB467900211D4F /* ViewController.swift */,
-				23D5A47E26CB467A00211D4F /* Assets.xcassets */,
-				23D5A48026CB467A00211D4F /* Main.storyboard */,
+				2367D5F526DC551F004CB907 /* DemoData.swift */,
+				2367D5C026DC538B004CB907 /* AppDelegate.swift */,
+				2367D5C226DC538B004CB907 /* ViewController.swift */,
+				2367D5C426DC538B004CB907 /* Assets.xcassets */,
+				2367D5C626DC538B004CB907 /* Main.storyboard */,
+				2367D5C926DC538B004CB907 /* Info.plist */,
+				2367D5CA26DC538B004CB907 /* DSFBrowserView_Demo.entitlements */,
 			);
 			path = "DSFBrowserView Demo";
 			sourceTree = "<group>";
 		};
-		23D5A48C26CB474000211D4F /* Frameworks */ = {
+		2367D5F026DC54A0004CB907 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -79,93 +83,100 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		23D5A47626CB467900211D4F /* DSFBrowserView Demo */ = {
+		2367D5BC26DC538B004CB907 /* DSFBrowserView Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23D5A48526CB467A00211D4F /* Build configuration list for PBXNativeTarget "DSFBrowserView Demo" */;
+			buildConfigurationList = 2367D5E326DC538B004CB907 /* Build configuration list for PBXNativeTarget "DSFBrowserView Demo" */;
 			buildPhases = (
-				23D5A47326CB467900211D4F /* Sources */,
-				23D5A47426CB467900211D4F /* Frameworks */,
-				23D5A47526CB467900211D4F /* Resources */,
+				2367D5B926DC538B004CB907 /* Sources */,
+				2367D5BA26DC538B004CB907 /* Frameworks */,
+				2367D5BB26DC538B004CB907 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2367D5F426DC54E4004CB907 /* PBXTargetDependency */,
 			);
 			name = "DSFBrowserView Demo";
 			packageProductDependencies = (
-				23D5A48A26CB46F700211D4F /* DSFAppKitBuilder */,
-				23D5A48D26CB474000211D4F /* DSFBrowserView */,
+				2367D5ED26DC53AA004CB907 /* DSFAppKitBuilder */,
+				2367D5F126DC54A0004CB907 /* DSFBrowserView */,
 			);
 			productName = "DSFBrowserView Demo";
-			productReference = 23D5A47726CB467900211D4F /* DSFBrowserView Demo.app */;
+			productReference = 2367D5BD26DC538B004CB907 /* DSFBrowserView Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		23D5A46F26CB467900211D4F /* Project object */ = {
+		2367D5B526DC538B004CB907 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					23D5A47626CB467900211D4F = {
-						CreatedOnToolsVersion = 13.0;
+					2367D5BC26DC538B004CB907 = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
-			buildConfigurationList = 23D5A47226CB467900211D4F /* Build configuration list for PBXProject "DSFBrowserView Demo" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = 2367D5B826DC538B004CB907 /* Build configuration list for PBXProject "DSFBrowserView Demo" */;
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 23D5A46E26CB467900211D4F;
+			mainGroup = 2367D5B426DC538B004CB907;
 			packageReferences = (
-				23D5A48926CB46F700211D4F /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */,
+				2367D5EC26DC53AA004CB907 /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */,
 			);
-			productRefGroup = 23D5A47826CB467900211D4F /* Products */;
+			productRefGroup = 2367D5BE26DC538B004CB907 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23D5A47626CB467900211D4F /* DSFBrowserView Demo */,
+				2367D5BC26DC538B004CB907 /* DSFBrowserView Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		23D5A47526CB467900211D4F /* Resources */ = {
+		2367D5BB26DC538B004CB907 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23D5A47F26CB467A00211D4F /* Assets.xcassets in Resources */,
-				23D5A48226CB467A00211D4F /* Main.storyboard in Resources */,
+				2367D5C526DC538B004CB907 /* Assets.xcassets in Resources */,
+				2367D5C826DC538B004CB907 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		23D5A47326CB467900211D4F /* Sources */ = {
+		2367D5B926DC538B004CB907 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2374934126CB66300014AB2D /* DemoData.swift in Sources */,
-				23D5A47D26CB467900211D4F /* ViewController.swift in Sources */,
-				23D5A47B26CB467900211D4F /* AppDelegate.swift in Sources */,
+				2367D5F626DC551F004CB907 /* DemoData.swift in Sources */,
+				2367D5C326DC538B004CB907 /* ViewController.swift in Sources */,
+				2367D5C126DC538B004CB907 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2367D5F426DC54E4004CB907 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 2367D5F326DC54E4004CB907 /* DSFBrowserView */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		23D5A48026CB467A00211D4F /* Main.storyboard */ = {
+		2367D5C626DC538B004CB907 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				23D5A48126CB467A00211D4F /* Base */,
+				2367D5C726DC538B004CB907 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -173,13 +184,13 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		23D5A48326CB467A00211D4F /* Debug */ = {
+		2367D5E126DC538B004CB907 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -224,7 +235,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -234,13 +245,13 @@
 			};
 			name = Debug;
 		};
-		23D5A48426CB467A00211D4F /* Release */ = {
+		2367D5E226DC538B004CB907 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -279,7 +290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -288,60 +299,46 @@
 			};
 			name = Release;
 		};
-		23D5A48626CB467A00211D4F /* Debug */ = {
+		2367D5E426DC538B004CB907 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "DSFBrowserView Demo/DSFBrowserView_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3L6RK3LGGW;
-				ENABLE_APP_SANDBOX = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_FILE = "DSFBrowserView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dagronf.dsfbrowserview.demo.DSFBrowserView-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dagronf.dsfbrowserview.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		23D5A48726CB467A00211D4F /* Release */ = {
+		2367D5E526DC538B004CB907 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "DSFBrowserView Demo/DSFBrowserView_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3L6RK3LGGW;
-				ENABLE_APP_SANDBOX = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_FILE = "DSFBrowserView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dagronf.dsfbrowserview.demo.DSFBrowserView-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dagronf.dsfbrowserview.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -349,20 +346,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		23D5A47226CB467900211D4F /* Build configuration list for PBXProject "DSFBrowserView Demo" */ = {
+		2367D5B826DC538B004CB907 /* Build configuration list for PBXProject "DSFBrowserView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23D5A48326CB467A00211D4F /* Debug */,
-				23D5A48426CB467A00211D4F /* Release */,
+				2367D5E126DC538B004CB907 /* Debug */,
+				2367D5E226DC538B004CB907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23D5A48526CB467A00211D4F /* Build configuration list for PBXNativeTarget "DSFBrowserView Demo" */ = {
+		2367D5E326DC538B004CB907 /* Build configuration list for PBXNativeTarget "DSFBrowserView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23D5A48626CB467A00211D4F /* Debug */,
-				23D5A48726CB467A00211D4F /* Release */,
+				2367D5E426DC538B004CB907 /* Debug */,
+				2367D5E526DC538B004CB907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -370,27 +367,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		23D5A48926CB46F700211D4F /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */ = {
+		2367D5EC26DC53AA004CB907 /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dagronf/DSFAppKitBuilder";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 4.3.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		23D5A48A26CB46F700211D4F /* DSFAppKitBuilder */ = {
+		2367D5ED26DC53AA004CB907 /* DSFAppKitBuilder */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 23D5A48926CB46F700211D4F /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */;
+			package = 2367D5EC26DC53AA004CB907 /* XCRemoteSwiftPackageReference "DSFAppKitBuilder" */;
 			productName = DSFAppKitBuilder;
 		};
-		23D5A48D26CB474000211D4F /* DSFBrowserView */ = {
+		2367D5F126DC54A0004CB907 /* DSFBrowserView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSFBrowserView;
+		};
+		2367D5F326DC54E4004CB907 /* DSFBrowserView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DSFBrowserView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 23D5A46F26CB467900211D4F /* Project object */;
+	rootObject = 2367D5B526DC538B004CB907 /* Project object */;
 }

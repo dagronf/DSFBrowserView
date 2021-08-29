@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19150"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -685,7 +685,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="DSFBrowserView Demo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -707,40 +707,40 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="DSFBrowserView_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="771" height="563"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="481"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fillProportionally" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="10" verticalHuggingPriority="10" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKl-nf-09i">
-                                <rect key="frame" x="20" y="20" width="731" height="523"/>
+                            <stackView distribution="fillProportionally" orientation="vertical" alignment="centerX" spacing="16" horizontalStackHuggingPriority="999" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X08-Nt-37N">
+                                <rect key="frame" x="20" y="20" width="690" height="441"/>
                                 <subviews>
-                                    <customView horizontalHuggingPriority="10" verticalHuggingPriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iip-Os-6bs" customClass="DSFBrowserView" customModule="DSFBrowserView">
-                                        <rect key="frame" x="0.0" y="28" width="731" height="495"/>
+                                    <customView horizontalHuggingPriority="10" verticalHuggingPriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="5WO-3G-kys" customClass="DSFBrowserView" customModule="DSFBrowserView">
+                                        <rect key="frame" x="0.0" y="36" width="690" height="405"/>
                                     </customView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="999" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SPW-dl-CbJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="731" height="20"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CxP-z9-tZi">
+                                        <rect key="frame" x="0.0" y="0.0" width="690" height="20"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtE-XW-cB3" userLabel="Reload All">
-                                                <rect key="frame" x="-7" y="-7" width="95" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Reload All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="16g-pf-9uz">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pig-wX-P5w">
+                                                <rect key="frame" x="-7" y="-7" width="156" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Reload First Column" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wNS-sh-ITw">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="userPressedReset:" target="XfG-lQ-9wD" id="MCh-DG-P4s"/>
+                                                    <action selector="userPressedReset:" target="XfG-lQ-9wD" id="SFG-CP-Ng7"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rru-H5-6vc" userLabel="Reload 1">
-                                                <rect key="frame" x="82" y="-7" width="85" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Reload 1" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VAN-4u-h7g">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-wp-rnZ">
+                                                <rect key="frame" x="143" y="-7" width="175" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Reload Second Column" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bKO-6Y-KfD">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="reloadOne:" target="XfG-lQ-9wD" id="ONS-nm-Ext"/>
+                                                    <action selector="reloadOne:" target="XfG-lQ-9wD" id="6kW-aI-Tbv"/>
                                                 </connections>
                                             </button>
-                                            <customView horizontalHuggingPriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="KtN-Ku-4VB">
-                                                <rect key="frame" x="168" y="0.0" width="563" height="20"/>
+                                            <customView horizontalHuggingPriority="10" verticalHuggingPriority="10" horizontalCompressionResistancePriority="10" verticalCompressionResistancePriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="NcE-5n-Mku">
+                                                <rect key="frame" x="319" y="0.0" width="371" height="20"/>
                                             </customView>
                                         </subviews>
                                         <visibilityPriorities>
@@ -766,19 +766,19 @@
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CKl-nf-09i" secondAttribute="trailing" constant="20" symbolic="YES" id="BQd-Ix-iOW"/>
-                            <constraint firstItem="CKl-nf-09i" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="LCi-AR-BtN"/>
-                            <constraint firstItem="CKl-nf-09i" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="dVo-Q8-WuZ"/>
-                            <constraint firstAttribute="bottom" secondItem="CKl-nf-09i" secondAttribute="bottom" constant="20" symbolic="YES" id="dgP-iz-Orh"/>
+                            <constraint firstItem="X08-Nt-37N" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="0on-za-fvb"/>
+                            <constraint firstAttribute="bottom" secondItem="X08-Nt-37N" secondAttribute="bottom" constant="20" symbolic="YES" id="OcP-x9-d5W"/>
+                            <constraint firstAttribute="trailing" secondItem="X08-Nt-37N" secondAttribute="trailing" constant="20" symbolic="YES" id="ioM-zK-5ar"/>
+                            <constraint firstItem="X08-Nt-37N" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="yIF-SU-ZBY"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="browserView" destination="Iip-Os-6bs" id="3ek-VQ-8jy"/>
+                        <outlet property="browserView" destination="5WO-3G-kys" id="wby-9m-lOa"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="860.5"/>
+            <point key="canvasLocation" x="75" y="843"/>
         </scene>
     </scenes>
 </document>
