@@ -130,12 +130,17 @@ internal extension DSFBrowserView {
 			}
 			tableView.allowsEmptySelection = true
 			tableView.allowsMultipleSelection = false
+
+			#if swift(>=5.3)
+
 			if #available(macOS 11.0, *) {
 				tableView.style = .inset
 			}
 			else {
 				// Fallback on earlier versions
 			}
+
+			#endif
 			// tableView.gridStyleMask = .dashedHorizontalGridLineMask
 
 			let column = NSTableColumn()
