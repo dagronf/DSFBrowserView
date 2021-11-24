@@ -55,10 +55,17 @@ public class DSFBrowserView: NSView {
 	/// scroll bars when they are not needed.
 	public var hideSeparators: Bool = true {
 		didSet {
-			self.browserStack.arrangedSubviews
-				.compactMap { $0 as? NSBox }
-				.forEach { $0.isHidden = self.hideSeparators }
+			self.hSplitView.showsSplitter = !self.hideSeparators
+			self.hSplitView.needsLayout = true
 		}
+	}
+
+	/// The autosave name for the control.
+	///
+	/// Set an autosave name to remember the positioning of the splitters
+	@IBInspectable public var autosaveName: String? {
+		get { self.hSplitView.autosaveName }
+		set { self.hSplitView.autosaveName = newValue }
 	}
 
 	// MARK: - Header visibility
@@ -105,7 +112,7 @@ public class DSFBrowserView: NSView {
 			let selections = s[index]
 
 			return selections.compactMap { selection in
-				return self.delegate?.browserView(self, child: selection, ofItem: column.item)
+				self.delegate?.browserView(self, child: selection, ofItem: column.item)
 			}
 		}
 	}
@@ -116,9 +123,10 @@ public class DSFBrowserView: NSView {
 			let leafSels = self.columnSelections.last,
 			leafSels.count > 0,
 			let lastColumn = self.columns.last,
-			let lastColumnItem = lastColumn.item else {
-				return []
-			}
+			let lastColumnItem = lastColumn.item else
+		{
+			return []
+		}
 
 		return leafSels.compactMap { selection in
 			self.delegate?.browserView(self, child: selection, ofItem: lastColumnItem)
@@ -138,13 +146,32 @@ public class DSFBrowserView: NSView {
 	}
 
 	deinit {
-		self.browserStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		self.hSplitView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 		self.columns.removeAll()
 	}
 
 	// Privates
+	class BrowserSplitView: NSSplitView {
+		var splitterColor: NSColor = .gridColor
+		var showsSplitter = true {
+			didSet {
+				splitterColor = showsSplitter ? .gridColor : .clear
+			}
+		}
 
-	private let browserStack = NSStackView()
+		override var dividerColor: NSColor {
+			self.splitterColor
+		}
+	}
+
+	private let hSplitView: BrowserSplitView = {
+		let v = BrowserSplitView()
+		v.translatesAutoresizingMaskIntoConstraints = false
+		v.isVertical = true
+		v.dividerStyle = .thin
+		return v
+	}()
+
 	private var columns: [BrowserColumn] = []
 }
 
@@ -160,8 +187,8 @@ public extension DSFBrowserView {
 	) {
 		self.add(
 			Column(headerText,
-					 allowMultipleSelection: allowMultipleSelection,
-					 allowEmptySelection: allowEmptySelection))
+			       allowMultipleSelection: allowMultipleSelection,
+			       allowEmptySelection: allowEmptySelection))
 	}
 
 	/// Add a column
@@ -175,22 +202,11 @@ public extension DSFBrowserView {
 		c.tableView.allowsEmptySelection = column.allowEmptySelection
 		c.tableView.allowsMultipleSelection = column.allowMultipleSelection
 
-		if self.columns.count > 0 {
-			let separator = NSBox(frame: NSRect(x: 0, y: 0, width: 5, height: 50))
-			separator.translatesAutoresizingMaskIntoConstraints = false
-			separator.boxType = .separator
-			separator.setContentHuggingPriority(.defaultLow, for: .vertical)
-			separator.setContentHuggingPriority(.required, for: .horizontal)
-
-			separator.isHidden = self.hideSeparators
-
-			self.browserStack.addArrangedSubview(separator)
-		}
-
 		c.parent = self
 		c.label.font = self.headerFont
 		self.columns.append(c)
-		self.browserStack.addArrangedSubview(c.view())
+		
+		self.hSplitView.addArrangedSubview(c.view())
 
 		self.updateAllColumnsForHeaderVisibility()
 		self.updateAutohidesScrollers()
@@ -199,7 +215,21 @@ public extension DSFBrowserView {
 	/// Remove all the columns from the browser view
 	func removeAllColumns() {
 		self.columns.removeAll()
-		self.browserStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+		self.hSplitView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+	}
+}
+
+// MARK: - Column sizing
+
+public extension DSFBrowserView {
+	/// Make all the columns the same width
+	func makeEqualWidths() {
+		let w = self.hSplitView.frame.width / CGFloat(self.hSplitView.arrangedSubviews.count)
+		var pos = w
+		for i in 0 ..< self.hSplitView.arrangedSubviews.count - 1 {
+			self.hSplitView.setPosition(pos, ofDividerAt: i)
+			pos += w
+		}
 	}
 }
 
@@ -233,8 +263,8 @@ public extension DSFBrowserView {
 		_ headerText: String? = nil,
 		allowsMultipleSelection: Bool? = nil,
 		allowsEmptySelection: Bool? = nil,
-		forColumn column: Int)
-	{
+		forColumn column: Int
+	) {
 		if let h = headerText {
 			self.setHeaderText(h, forColumn: column)
 		}
@@ -261,7 +291,7 @@ public extension DSFBrowserView {
 
 	/// Reload the contents of a particular column
 	func reloadData(column: Int) {
-		//let column = self.columns[column]
+		// let column = self.columns[column]
 		self.columns[column].reload()
 	}
 }
@@ -269,18 +299,13 @@ public extension DSFBrowserView {
 internal extension DSFBrowserView {
 	// Configure the base view
 	private func setup() {
-		self.browserStack.translatesAutoresizingMaskIntoConstraints = false
-		self.browserStack.orientation = .horizontal
-		self.browserStack.distribution = .fillEqually
-		self.browserStack.spacing = 4
-
-		self.addSubview(self.browserStack)
+		self.addSubview(self.hSplitView)
 
 		NSLayoutConstraint.activate([
-			self.browserStack.leftAnchor.constraint(equalTo: self.leftAnchor),
-			self.browserStack.rightAnchor.constraint(equalTo: self.rightAnchor),
-			self.browserStack.topAnchor.constraint(equalTo: self.topAnchor),
-			self.browserStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+			self.hSplitView.leftAnchor.constraint(equalTo: self.leftAnchor),
+			self.hSplitView.rightAnchor.constraint(equalTo: self.rightAnchor),
+			self.hSplitView.topAnchor.constraint(equalTo: self.topAnchor),
+			self.hSplitView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 		])
 	}
 
@@ -382,7 +407,6 @@ public extension DSFBrowserView {
 // MARK: - Keyboard handling
 
 internal extension DSFBrowserView {
-
 	func moveForward(_ column: BrowserColumn) {
 		if column.columnIndex >= self.columnCount - 1 {
 			return
@@ -397,7 +421,6 @@ internal extension DSFBrowserView {
 			// Select the first row
 			nextColumn.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
 		}
-
 	}
 
 	func moveBack(_ column: BrowserColumn) {
@@ -420,6 +443,55 @@ public extension DSFBrowserView {
 	override func prepareForInterfaceBuilder() {
 		self.setup()
 		self.removeAllColumns()
+	}
+}
+
+// MARK: - Saving/loading from user defaults
+
+public extension DSFBrowserView {
+
+	/// Load the layout from the user defaults.
+	func loadFromDefaults(userDefaults: UserDefaults = UserDefaults.standard) -> Bool {
+		guard
+			let autosaveName = self.autosaveName,
+			let settings = userDefaults.dictionary(forKey: autosaveName)
+		else {
+			return false
+		}
+
+		if let widths = settings["dividerPositions"] as? [CGFloat] {
+			for w in widths.enumerated() {
+				self.hSplitView.setPosition(w.1, ofDividerAt: w.0)
+			}
+		}
+
+		let hideSeparators = settings["hideSeparators"] as? Bool ?? true
+		self.hideSeparators = hideSeparators
+
+		let headerVisibility = settings["headerVisibility"] as? Int ?? 0
+		if let e = HeaderVisibility(rawValue: headerVisibility) {
+			self.headerVisibility = e
+		}
+
+		return true
+	}
+
+	/// Save the current layout to the user defaults
+	func saveToDefaults(userDefaults: UserDefaults = UserDefaults.standard) {
+		guard let autosaveName = self.autosaveName else { return }
+
+		let def = NSMutableDictionary()
+		let dividerCount = self.hSplitView.arrangedSubviews.count - 1
+		var pos: CGFloat = 0
+		let widths: [CGFloat] = (0 ..< dividerCount).map {
+			pos += self.hSplitView.arrangedSubviews[$0].frame.width
+			return pos
+		}
+		def["dividerPositions"] = widths
+		def["hideSeparators"] = self.hideSeparators
+		def["headerVisibility"] = self.headerVisibility.rawValue
+
+		userDefaults.set(def, forKey: autosaveName)
 	}
 }
 

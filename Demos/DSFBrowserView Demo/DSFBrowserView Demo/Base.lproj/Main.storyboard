@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -685,7 +685,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="DSFBrowserView Demo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="DSFBrowserView Demo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="PrimaryWindow" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -715,6 +715,9 @@
                                 <subviews>
                                     <customView horizontalHuggingPriority="10" verticalHuggingPriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="5WO-3G-kys" customClass="DSFBrowserView" customModule="DSFBrowserView">
                                         <rect key="frame" x="0.0" y="36" width="690" height="405"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="autosaveName" value="DemoBrowser"/>
+                                        </userDefinedRuntimeAttributes>
                                     </customView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CxP-z9-tZi">
                                         <rect key="frame" x="0.0" y="0.0" width="690" height="20"/>
@@ -739,16 +742,47 @@
                                                     <action selector="reloadOne:" target="XfG-lQ-9wD" id="6kW-aI-Tbv"/>
                                                 </connections>
                                             </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QO7-c1-lbj">
+                                                <rect key="frame" x="317" y="3" width="123" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Show Separator" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PSI-Vf-cba">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <connections>
+                                                        <action selector="userChangedSeparatorVisibility:" target="XfG-lQ-9wD" id="ArF-hz-umC"/>
+                                                    </connections>
+                                                </buttonCell>
+                                            </button>
+                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yqS-55-5cn">
+                                                <rect key="frame" x="445" y="-4" width="93" height="25"/>
+                                                <popUpButtonCell key="cell" type="push" title="Show" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="yKd-8l-lJH" id="hOL-aP-Wfl">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="4UQ-4c-5uz">
+                                                        <items>
+                                                            <menuItem title="Show" state="on" id="yKd-8l-lJH"/>
+                                                            <menuItem title="Hide" tag="1" id="qdK-1S-vgy"/>
+                                                            <menuItem title="Autohide" tag="2" id="OeS-i7-lEO"/>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="userChangedHeaderVisibility:" target="XfG-lQ-9wD" id="EPa-se-lPM"/>
+                                                </connections>
+                                            </popUpButton>
                                             <customView horizontalHuggingPriority="10" verticalHuggingPriority="10" horizontalCompressionResistancePriority="10" verticalCompressionResistancePriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="NcE-5n-Mku">
-                                                <rect key="frame" x="319" y="0.0" width="371" height="20"/>
+                                                <rect key="frame" x="542" y="0.0" width="148" height="20"/>
                                             </customView>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
